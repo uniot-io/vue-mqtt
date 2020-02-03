@@ -35,12 +35,12 @@ export default new class {
     return false
   }
 
-  emit (label, ...args) {
+  emit (label, args) {
     let ret = false
     this.listeners.forEach((listeners, key) => {
       if (this.eq(label, key) && listeners && listeners.length) {
         listeners.forEach((listener) => {
-          listener.callback.call(listener.vm, ...args, label)
+          listener.callback.call(listener.vm, { ...args, topic: label })
         })
         ret = true
       }
